@@ -17,6 +17,7 @@
             overflow: auto;
             background-color: #e6f4fd;
         }
+        
 
         /* Style untuk Bottom Navbar (Mobile) */
         .bottom-navbar {
@@ -32,6 +33,7 @@
             right: 0;
             z-index: 999;
         }
+        
 
         /* Style untuk Top Navbar (Desktop) */
         .top-navbar {
@@ -46,6 +48,7 @@
             top: 0;
             z-index: 999;
         }
+        
 
         /* Style untuk item navbar */
         .nav-item {
@@ -59,18 +62,21 @@
             align-items: center;
             font-size: 15px;
         }
+        
 
-        /* Style untuk tautan aktif */
+         /* Style untuk tautan aktif */
         .nav-item.active {
             background-color: #107dd8; /* Ganti dengan warna yang sesuai */
             color: #92d1fd;
         }
+        
 
-        /* Efek hover */
+         /* Efek hover */
         .nav-item:hover {
             background-color: #107dd8; /* Ganti dengan warna yang sesuai */
             color: #92d1fd;
         }
+        
 
         .category-container {
             width: 100%;
@@ -78,7 +84,7 @@
             display: flex;
             justify-content: center; /* Meletakkan konten di tengah secara horizontal */
         }
-
+        
         .category {
             display: flex;
             flex-wrap: nowrap;
@@ -87,6 +93,7 @@
             white-space: nowrap;
             overflow-x: auto;
         }
+        
 
         .item {
             flex: 0 0 auto;
@@ -99,8 +106,9 @@
             font-weight: bold;
             cursor: pointer;
         }
+        
 
-        /* Gaya untuk kontainer kategori */
+         /* Gaya untuk kontainer kategori */
         .category-scroll {
             width: 100%;
             white-space: nowrap; /* Agar elemen-elemen tidak pindah ke baris berikutnya */
@@ -109,19 +117,22 @@
             display: block; /* Ubah display menjadi block agar bisa scroll di desktop */
             cursor: pointer;
         }
+        
 
-        /* Gaya untuk kartu Bootstrap */
+         /* Gaya untuk kartu Bootstrap */
         .custom-card-new {
             width: 350px; /* Tentukan lebar yang cukup besar untuk memicu scroll */
             display: inline-block; /* Agar elemen-elemen berbaris secara horizontal */
             margin-right: 10px;
             vertical-align: top; /* Agar elemen-elemen tetap sejajar */
         }
+        
 
-        /* Gaya untuk scrollbar x */
+         /* Gaya untuk scrollbar x */
         .category-scroll::-webkit-scrollbar {
             width: 10px; /* Lebar scrollbar */
         }
+        
 
         .category-scroll::-webkit-scrollbar-thumb {
             background-color: rgba(0, 0, 0, 0.1); /* Warna thumb scrollbar */
@@ -141,19 +152,20 @@
                 display: flex;
             }
             
+            
         }
     </style>
 </head>
 <body>
-<!--Navbar-->
-<!-- Bottom Navbar (Mobile) -->
+ <!--Navbar-->
+ <!-- Bottom Navbar (Mobile) -->
 <nav class="bottom-navbar shadow-sm">
     <a href="index.html" class="nav-item"><i class="fas fa-home"></i></a>
     <a href="pesanan.html" class="nav-item"><i class="fas fa-shopping-cart"></i></a>
     <a href="notification.html" class="nav-item"><i class="fa-solid fa-bell"></i></a>
     <a href="#" class="nav-item active"><i class="fas fa-user"></i></a>
 </nav>
-<!-- Top Navbar (Desktop) -->
+ <!-- Top Navbar (Desktop) -->
 <nav class="top-navbar shadow-sm">
     <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
     <a href="pesanan.html" class="nav-item"><i class="fas fa-shopping-cart"></i> Cart</a>
