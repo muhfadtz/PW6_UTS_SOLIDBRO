@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'nexa', sans-serif; /* Menambahkan font family 'nexa' */
+            height: 100%;
+            overflow: auto;
+            background-color: #e6f4fd;
+        }
+
+        /* Style untuk Bottom Navbar (Mobile) */
+        .bottom-navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #92d1fd;
+            padding: 13px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999; 
+        }
+
+        /* Style untuk Top Navbar (Desktop) */
+        .top-navbar {
+            display: none; /* Sembunyikan untuk tampilan mobile */
+            justify-content: space-around;
+            background-color: #92d1fd;
+            padding: 10px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            font-size: small;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        /* Style untuk item navbar */
+        .nav-item {
+            text-decoration: none;
+            color: #024780;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 15px;
+        }
+
+        /* Style untuk tautan aktif */
+        .nav-item.active {
+            background-color: #107dd8; 
+            color: #92d1fd;
+        }
+
+        /* Efek hover */
+        .nav-item:hover {
+            background-color: #107dd8; 
+            color: #92d1fd;
+        }
+
+        .category-container {
+            width: 100%;
+            overflow-x: auto;
+            display: flex;
+            justify-content: center; /* Meletakkan konten di tengah secara horizontal */
+        }
+
+        .category {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+            padding: 10px;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .item {
+            flex: 0 0 auto;
+            background-color: #dce2e6;
+            padding: 5px;
+            border-radius: 30px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            border: 1px solid #000;
+            color: #0b1749;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: small;
+        }
+
+        .item.active {
+            background-color: #107dd8;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            border: 1px solid #0b1749;
+        }
+
+        /* Gaya untuk kontainer kategori */
+        .category-scroll {
+            width: 100%;
+            white-space: nowrap; /* Agar elemen-elemen tidak pindah ke baris berikutnya */
+            overflow-x: auto; /* Aktifkan scrolling horizontal */
+            -webkit-overflow-scrolling: touch; /* Untuk dukungan scrolling di perangkat berbasis sentuh */
+            display: block; /* Ubah display menjadi block agar bisa scroll di desktop */
+            cursor: pointer;
+        }
+
+        /* Gaya untuk kartu Bootstrap */
+        .custom-card-new {
+            width: 250px; /* Tentukan lebar yang cukup besar untuk memicu scroll */
+            display: inline-block; /* Agar elemen-elemen berbaris secara horizontal */
+            margin-right: 5px;
+            vertical-align: top; /* Agar elemen-elemen tetap sejajar */
+        }
+
+        /* Gaya untuk scrollbar x */
+        .category-scroll::-webkit-scrollbar {
+            width: 10px; /* Lebar scrollbar */
+        }
+
+        .category-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1); /* Warna thumb scrollbar */
+            border-radius: 50px; /* Sudut bulat pada thumb scrollbar */
+        }
+
+        .category-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.1); /* Warna thumb scrollbar saat hover */
+        }
+
+        .chat-bubble {
+            background-color: #0084ff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease-in;
+        }
+
+        .chat-bubble i {
+            margin-right: 0;
+        }
+
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 120px;
+            right: 40px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            color: #000;
+            font-weight: bold;
+            overflow: auto;
+            animation: fadeIn 0.3s ease-in;
+            z-index: 999;
+        }
+
+        .chat-content {
+            padding: 20px;
+        }
+
+        .close {
+            float: right;
+            cursor: pointer;
+        }
+
+        .verified-icon {
+            color: #107dd8;
+            margin: 3px;
+        }
+
+        .chat-send {
+            position: fixed;
+            bottom: 140px;
+            padding: 10px;
+            background-color: #024780;
+        }
+
+        input[type="text"] {
+            width: 180px;
+            padding: 7px;
+            box-sizing: border-box;
+            border-radius: 30px;
+        }
+
+        input[type="submit"] {
+            width: auto;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+
+        #description:hover {
+            font-weight: bold;
+            color: #0084ff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        /* Media query untuk tampilan desktop */
+        @media screen and (min-width: 768px) {
+            .bottom-navbar {
+                display: none; /* Sembunyikan untuk tampilan desktop */
+            }
+            .top-navbar {
+                display: flex;
+            }
+
+            .chat-box {
+                display: none;
+                position: fixed;
+                bottom: 120px;
+                right: 40px;
+                width: 400px;
+                height: 500px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                color: #000;
+                font-weight: bold;
+                overflow: auto;
+                animation: fadeIn 0.3s ease-in;
+                z-index: 999;
+            }
+
+            input[type="text"] {
+                width: 280px;
+                padding: 7px;
+                box-sizing: border-box;
+                border-radius: 30px;
+                font-family: bold;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+<!--Navbar-->
+<!-- Bottom Navbar (Mobile) -->
+<nav class="bottom-navbar shadow-sm">
+    <a href="#" class="nav-item active"><i class="fas fa-home"></i></a>
+    <a href="pesanan.html" class="nav-item"><i class="fas fa-shopping-cart"></i></a>
+    <a href="notification.html" class="nav-item"><i class="fa-solid fa-bell"></i></a>
+    <a href="profile.html" class="nav-item"><i class="fas fa-user"></i></a>
+</nav>
+<!-- Top Navbar (Desktop) -->
+<nav class="top-navbar shadow-sm">
+    <a href="#" class="nav-item active"><i class="fas fa-home"></i> Home</a>
+    <a href="pesanan.html" class="nav-item"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a class="navbar-brand" href="#"><img src="img/logo.png" alt="Logo" style="max-width: 40px;"></a>
+    <a href="notification.html" class="nav-item"><i class="fa-solid fa-bell"></i> Notification</a>
+    <a href="profile.html" class="nav-item"><i class="fas fa-user"></i> Profile</a>
+</nav>
+<!-- Main contennt-->
+<div class="container">
+    <div class="row text-center m-3 d-block d-md-none">
+        <div class="col-12">
+            <img src="img/logo.png" alt="profile" style="max-width: 40px;">
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-5 text-start">
+             <h4 class="fw-bold">Hi mh.fadtz,<br><span class="fw-normal" style="font-size: medium;">welcome back</span></h4>
+        </div>
+        <div class="col-5 text-end">
+            <img src="img/img_1.jpg" alt="profile" style="max-width: 50px; border-radius: 50%; border: 2px solid #024780;"> 
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-10">
+            <input type="text" name="search" id="" placeholder="search..." style="width: 100%; border-radius: 30px; padding-left: 20px; color: #0b1749; height: 40px; font-weight: bold; border: 3px solid #0b1749;">
+        </div>
+    </div>
+    <div class="row custom-row justify-content-center p-3 mb-3">
+          <div class="category-container">
+            <div class="category">
+                <div class="item" onclick="window.location.href='#'">10k-90k</div>
+                <div class="item" onclick="window.location.href='#'">100k-200k</div>
+                <div class="item" onclick="window.location.href='#'">300k-400k</div>
+                <div class="item" onclick="window.location.href='#'">500k-600k</div>
+                <div class="item" onclick="window.location.href='#'">700k-800k</div>
+                <div class="item" onclick="window.location.href='#'">900k-1Jt</div>
+                <div class="item" onclick="window.location.href='#'">1Jt++</div>
+            </div>            
+          </div>
+    </div>
+    <h4 class="fw-bold mb-2 ms-3"><i class="fas fa-fire" style="color: #ff5454;"></i> Recommended For You.</h4>
+    <div class="category-scroll p-5 rounded-5" style="border-radius: 30px; background-color: rgba(97, 155, 255, 0.2);">
+        <!-- Kartu Bootstrap (6 item) -->
+        <div class="custom-card-new">
+            <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-radius: 10px;">
+            <div class="card-body">
+                <h5 class="card-title mt-2">Item 1</h5>
+                <p class="card-text">Read More..</p>
+                <a href="#" class="btn btn-dark">Rp300k</a>
+            </div>
+        </div>
+
+        <div class="custom-card-new">
+            <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-radius: 10px;">
+            <div class="card-body">
+                <h5 class="card-title mt-2">Item 2</h5>
+                <p class="card-text">Read More..</p>
+                <a href="#" class="btn btn-dark">Rp300k</a>
+            </div>
+        </div>
+
+        <div class="custom-card-new">
+            <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-radius: 10px;">
+            <div class="card-body">
+                <h5 class="card-title mt-2">Item 3</h5>
+                <p class="card-text">Read More..</p>
+                <a href="#" class="btn btn-dark">Rp300k</a>
+            </div>
+        </div>
+
+        <div class="custom-card-new">
+            <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-radius: 10px;">
+            <div class="card-body">
+                <h5 class="card-title mt-2">Item 4</h5>
+                <p class="card-text">Read More..</p>
+                <a href="#" class="btn btn-dark">Rp300k</a>
+            </div>
+        </div>
+
+        <div class="custom-card-new">
+            <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-radius: 10px;">
+            <div class="card-body">
+                <h5 class="card-title mt-2">Item 5</h5>
+                <p class="card-text">Read More..</p>
+                <a href="#" class="btn btn-dark">Rp300k</a>
+            </div>
+        </div>
+
+        <div class="custom-card-new">
+            <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-radius: 10px;">
+            <div class="card-body">
+                <h5 class="card-title mt-2">Item 6</h5>
+                <p class="card-text">Read More..</p>
+                <a href="#" class="btn btn-dark">Rp300k</a>
+            </div>
+        </div>
+        <!-- Akhir Kartu Bootstrap -->
+    </div>
+    
+    <!-- Chat Bro -->
+    <div class="chat-bubble" onclick="toggleChat()"><i class="far fa-comment-dots"></i></div>
+    <div id="chat-box" class="chat-box" onclick="stopPropagation(event)">
+        <div class="chat-content">
+            <span class="close text-danger fw-bold" onclick="toggleChat()">x</span>
+            <div class="row mb-3">
+                <div class="col-1 text-start me-2">
+                    <img src="img/logo.png" alt="profile" style="max-width: 30px; border-radius: 50%; border: 2px solid #024780;"> 
+                </div>
+                <div class="col-10 text-start ms-1">
+                    <p>revamstore<span class="verified-icon"><i class="fas fa-check-circle"></i></span></p> 
+                </div>
+            </div>
+            <div class="row text-start ms-2 mb-1">
+                <div class="col-12" style="color: #0b1749;">
+                    <p>halo apa yang bisa kami bantu?😁</p>
+                </div>
+            </div>
+            <div class="row text-end me-2 mb-1">
+                <div class="col-12" style="color: #0084ff;">
+                    <p>halo</p>
+                </div>
+            </div>
+            <div class="chat-send">
+                <form onsubmit="stopSubmit(event)">
+                    <input type="text" placeholder="Type Messages Here" onclick="stopPropagation(event)"/>
+                    <input type="submit" value="Send" onclick="stopPropagation(event)"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Akhir Chat Bro -->
+
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-lg-3 mb-2">
+            <div class="card" style="border-radius: 10px;">
+                <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                <div class="card-body">
+                    <h5 class="card-title">Jual Akun Valorant</h5>
+                    <span class="badge bg-success mb-1">Active</span>
+                    <p class="card-text" id="description">Spek Akun:</p>
+                    <a href="#" class="btn btn-dark">Rp300k</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+            <div class="card" style="border-radius: 10px;">
+                <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                <div class="card-body">
+                    <h5 class="card-title">Jual Akun Valorant</h5>
+                    <span class="badge bg-success mb-1">Active</span>
+                    <p class="card-text" id="description">Spek Akun:</p>
+                    <a href="#" class="btn btn-dark">Rp300k</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+            <div class="card" style="border-radius: 10px;">
+                <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                <div class="card-body">
+                    <h5 class="card-title">Jual Akun Valorant</h5>
+                    <span class="badge bg-warning mb-1">in-process</span>
+                    <p class="card-text" id="description">Spek Akun:</p>
+                    <a href="#" class="btn btn-dark">Rp300k</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+            <div class="card" style="border-radius: 10px;">
+                <img src="img/tes1.png" class="card-img-top" alt="skin account" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                <div class="card-body">
+                    <h5 class="card-title">Jual Akun Valorant</h5>
+                    <span class="badge bg-danger mb-1">Sold</span>
+                    <p class="card-text" id="description">Spek Akun:</p>
+                    <a href="#" class="btn btn-dark">Rp300k</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end contennt-->
+
+<script>
+    function toggleChat() {
+        var chatBox = document.getElementById('chat-box');
+        if (chatBox.style.display === 'none') {
+            chatBox.style.display = 'block';
+        } else {
+            chatBox.style.display = 'none';
+        }
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"crossorigin="anonymous"></script>
+</body>
+</html>

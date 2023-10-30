@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'nexa', sans-serif; /* Menambahkan font family 'nexa' */
+            height: 100%;
+            overflow: auto;
+            background-color: #e6f4fd;
+        }
+
+        /* Style untuk Bottom Navbar (Mobile) */
+        .bottom-navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #92d1fd;
+            padding: 13px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        /* Style untuk Top Navbar (Desktop) */
+        .top-navbar {
+            display: none; /* Sembunyikan untuk tampilan mobile */
+            justify-content: space-around;
+            background-color: #92d1fd;
+            padding: 10px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            font-size: small;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        /* Style untuk item navbar */
+        .nav-item {
+            text-decoration: none;
+            color: #024780;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 15px;
+        }
+
+        /* Style untuk tautan aktif */
+        .nav-item.active {
+            background-color: #107dd8; /* Ganti dengan warna yang sesuai */
+            color: #92d1fd;
+        }
+
+        /* Efek hover */
+        .nav-item:hover {
+            background-color: #107dd8; /* Ganti dengan warna yang sesuai */
+            color: #92d1fd;
+        }
+
+        .category-container {
+            width: 100%;
+            overflow-x: auto;
+            display: flex;
+            justify-content: center; /* Meletakkan konten di tengah secara horizontal */
+        }
+
+        .category {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+            padding: 10px;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .item {
+            flex: 0 0 auto;
+            background-color: #024780;
+            padding: 10px;
+            border-radius: 30px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            border: 1px solid #000; /* Tambahkan border 1px solid warna hitam */
+            color: #dce2e6;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Gaya untuk kontainer kategori */
+        .category-scroll {
+            width: 100%;
+            white-space: nowrap; /* Agar elemen-elemen tidak pindah ke baris berikutnya */
+            overflow-x: auto; /* Aktifkan scrolling horizontal */
+            -webkit-overflow-scrolling: touch; /* Untuk dukungan scrolling di perangkat berbasis sentuh */
+            display: block; /* Ubah display menjadi block agar bisa scroll di desktop */
+            cursor: pointer;
+        }
+
+        /* Gaya untuk kartu Bootstrap */
+        .custom-card-new {
+            width: 350px; /* Tentukan lebar yang cukup besar untuk memicu scroll */
+            display: inline-block; /* Agar elemen-elemen berbaris secara horizontal */
+            margin-right: 10px;
+            vertical-align: top; /* Agar elemen-elemen tetap sejajar */
+        }
+
+        /* Gaya untuk scrollbar x */
+        .category-scroll::-webkit-scrollbar {
+            width: 10px; /* Lebar scrollbar */
+        }
+
+        .category-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1); /* Warna thumb scrollbar */
+            border-radius: 50px; /* Sudut bulat pada thumb scrollbar */
+        }
+
+        .category-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.1); /* Warna thumb scrollbar saat hover */
+        }
+
+        /* Media query untuk tampilan desktop */
+        @media screen and (min-width: 768px) {
+            .bottom-navbar {
+                display: none; /* Sembunyikan untuk tampilan desktop */
+            }
+            .top-navbar {
+                display: flex;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+<!--Navbar-->
+<!-- Bottom Navbar (Mobile) -->
+<nav class="bottom-navbar shadow-sm">
+    <a href="index.html" class="nav-item"><i class="fas fa-home"></i></a>
+    <a href="pesanan.html" class="nav-item"><i class="fas fa-shopping-cart"></i></a>
+    <a href="notification.html" class="nav-item"><i class="fa-solid fa-bell"></i></a>
+    <a href="#" class="nav-item active"><i class="fas fa-user"></i></a>
+</nav>
+<!-- Top Navbar (Desktop) -->
+<nav class="top-navbar shadow-sm">
+    <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
+    <a href="pesanan.html" class="nav-item"><i class="fas fa-shopping-cart"></i> Cart</a>
+    <a class="navbar-brand" href="#"><img src="img/logo.png" alt="Logo" style="max-width: 40px;"></a>
+    <a href="notification.html" class="nav-item"><i class="fa-solid fa-bell"></i> Notification</a>
+    <a href="#" class="nav-item active"><i class="fas fa-user"></i> Profile</a>
+</nav>
+<!-- Main contennt-->
+<div class="container">
+    <div class="row text-center m-3 d-block d-md-none">
+        <div class="col-12">
+            <img src="img/logo.png" alt="profile" style="max-width: 40px;">
+        </div>
+    </div>
+    <div class="row justify-content-center m-2">
+        <div class="col-md-8">
+            <h4 class="fw-bold mt-3 mb-3">Profile.</h4>
+            <div class="row justify-content-center mt-5 mb-3 p-3" style="background-color: #dce2e6; border-radius: 30px;">
+                <div class="col-6 text-start">
+                    <img src="img/img_1.jpg" alt="profile" style="max-width: 70px; border-radius: 50%; border: 2px solid #024780;"> 
+                </div>              
+                <div class="col-6 text-end">
+                    <h4 class="fw-bold">Hi mh.fadtz,<br><span class="fw-normal" style="font-size: medium;">welcome back</span></h4>
+               </div>    
+            </div>
+            <div class="row text-end mb-1 p-3" style="background-color: #dce2e6; border-radius: 30px;">
+                <div class="col-12 text-start mt-3">
+                    <h5 class="fw-bold text-start" style="color: #024780; cursor: pointer;" onclick="window.location.href='history.html'"><i class="fa-solid fa-clipboard-list"></i> History</h5><hr>
+                    <h5 class="fw-bold text-start" style="color: #024780; cursor: pointer;" onclick="window.location.href='paidyet.html'"><i class="fa-solid fa-file-invoice"></i> Paid Yet</h5><hr>
+                    <h5 class="fw-bold text-start" style="color: #024780; cursor: pointer;" onclick="window.location.href='account.html'"><i class="fa-solid fa-lock"></i> Account Center</h5><hr>
+                    <h5 class="fw-bold text-start" style="color: #024780; cursor: pointer;" onclick="window.location.href='settings.html'"><i class="fa-solid fa-gear"></i> Settings</h5><hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end contennt-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"crossorigin="anonymous"></script>
+</body>
+</html>
